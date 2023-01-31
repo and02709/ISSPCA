@@ -24,7 +24,7 @@
 iSSPCA <- function(X, Y, xts, sumabsv=4, niter=20, npc=1, orth=TRUE, 
                    trace=FALSE, v=NULL, center=TRUE, cnames=NULL, 
                    vpos=FALSE, vneg=FALSE, compute.pve=TRUE, 
-                   Ykernel=Ykernel=c("linear", "delta"), 
+                   Ykernel=c("linear", "delta"), 
                    decomposition.type=c("default","RSpectra")){
   X <- as.matrix(X)
   xts <- as.matrix(xts)
