@@ -7,6 +7,7 @@
 #' @param sumabsv sparseness penalty
 #' @param niter
 #' @param npc number of principal components
+#' @param npc.iter number of pls iterations
 #' @param orth
 #' @param trace
 #' @param v
@@ -21,7 +22,7 @@
 #' @export
 #' @examples SMD(x, sumabsu, sumabsv, niter=20,trace=TRUE, v, upos, uneg, vpos, vneg)
 
-iSSPCA <- function(X, Y, xts, sumabsv=4, niter=20, npc=1, orth=TRUE, 
+iSSPCA <- function(X, Y, xts, sumabsv=4, niter=20, npc=1, npc.iter=1, orth=TRUE, 
                    trace=FALSE, v=NULL, center=TRUE, cnames=NULL, 
                    vpos=FALSE, vneg=FALSE, compute.pve=TRUE, 
                    Ykernel=c("linear", "delta"), 
@@ -46,7 +47,7 @@ iSSPCA <- function(X, Y, xts, sumabsv=4, niter=20, npc=1, orth=TRUE,
   i <- 1
   
   if(sumabsv==0){
-    while(i < (npc+1)){
+    while(i < (npc.iter+1)){
       if(i==1){
         out <- SPCA(X=X, Y=Y, npc=npc, decomposition.type=decomposition.type, nobs=nobs, p=p, L=L, H=H)
         Ut <- as.matrix(out$v)
@@ -67,7 +68,7 @@ iSSPCA <- function(X, Y, xts, sumabsv=4, niter=20, npc=1, orth=TRUE,
     }
   }
   else{
-    while(i < (npc+1)){
+    while(i < (npc.iter+1)){
       if(i==1){
         Eigendecomp <- eigen(L)
         U <- Eigendecomp$vectors
